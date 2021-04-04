@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/css/main.ebeda3cf.chunk.css",
+    "main.js": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/js/main.fb6cbfdd.chunk.js",
+    "main.js.map": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/js/main.fb6cbfdd.chunk.js.map",
+    "runtime-main.js": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/js/runtime-main.2d4ba0f9.js",
+    "runtime-main.js.map": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/js/runtime-main.2d4ba0f9.js.map",
+    "static/css/2.066b4c9d.chunk.css": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/css/2.066b4c9d.chunk.css",
+    "static/js/2.e13af34a.chunk.js": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/js/2.e13af34a.chunk.js",
+    "static/js/2.e13af34a.chunk.js.map": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/js/2.e13af34a.chunk.js.map",
+    "index.html": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/index.html",
+    "static/css/2.066b4c9d.chunk.css.map": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/css/2.066b4c9d.chunk.css.map",
+    "static/css/main.ebeda3cf.chunk.css.map": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/css/main.ebeda3cf.chunk.css.map",
+    "static/js/2.e13af34a.chunk.js.LICENSE.txt": "/Innowise-Lab-Internship--Level-1--Clever-to-do-list/static/js/2.e13af34a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2d4ba0f9.js",
+    "static/css/2.066b4c9d.chunk.css",
+    "static/js/2.e13af34a.chunk.js",
+    "static/css/main.ebeda3cf.chunk.css",
+    "static/js/main.fb6cbfdd.chunk.js"
+  ]
+}
