@@ -1,0 +1,40 @@
+.contentContainer {
+    margin: 0 auto;
+    max-width: 60rem;
+}
+.taskHeader{
+    background: #f7f7f7;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.formError{
+    font-style: italic;
+}
+.textInput {
+    border: 1px solid #cacccd;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.description{
+    border: 1px solid #cacccd;
+    height:60px;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.addButton{
+    margin-top: 20px;
+    width: 133px;
+    background: #1c88bf;
+    color:white;
+    border: none;
+    font-weight: 300;
+    font-size:20px;
+    outline: none;
+    cursor: pointer;
+}
