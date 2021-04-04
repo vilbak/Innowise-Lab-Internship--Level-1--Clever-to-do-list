@@ -1,4 +1,5 @@
 {
+  "homepage": "https://vilbak.github.io/Innowise-Lab-Internship--Level-1--Clever-to-do-list/",
   "name": "app",
   "version": "0.1.0",
   "private": true,
@@ -32,7 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -67,6 +70,7 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-testing-library": "^3.9.0",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.1"
   }
 }
