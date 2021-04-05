@@ -5,7 +5,7 @@ export const setStartDate = (startDate) => ({
   startDate,
 })
 
-// SET_END_DATE
+
 export const setEndDate = (endDate) => ({
   type: actionTypes.SET_END_DATE,
   endDate,

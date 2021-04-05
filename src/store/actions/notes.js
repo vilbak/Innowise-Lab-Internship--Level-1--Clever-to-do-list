@@ -7,18 +7,21 @@ export const addNote = task => (
   }
 )
 
-
-
 export const removeNote = ({ id } = {}) => ({
   type: 'REMOVE_NOTE',
   id,
 })
 
 export const startRemoveNote = ({ id } = {}) => {
-  return (dispatch) => {
-    return database.ref(`notes/${id}`).remove().then(() => {
-      dispatch(removeNote({ id }))
+  return (dispatch, getState) => {
+    const uid = getState().auth.userId
+
+    database.ref(`users/${uid}/notes/${id}`).remove().then(() => {
+
+      dispatch(removeNote(({ id })))
     })
+
+
   }
 }
 
@@ -28,23 +31,28 @@ export const editNote = (id, updates) => ({
   id,
   updates,
 })
+
 export const startEditNote = (id, updates) => {
-  return (dispatch) => {
-    return database.ref(`notes/${id}`).update(updates).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.userId
+    return database.ref(`users/${uid}/notes/${id}`).update(updates).then(() => {
       dispatch(editNote(id, updates))
     })
   }
 }
 
 export const startAddNote = (noteData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.userId
     const {
       description = '',
       note = '',
       createdAt = '',
+      done = '',
     } = noteData
-    const notes = { description, note, createdAt }
-    database.ref('notes').push(notes).then((ref) => {
+    const notes = { description, note, createdAt, done }
+    database.ref(`users/${uid}/notes`).push(notes).then((ref) => {
+
       dispatch(addNote(({
         id: ref.key,
         ...notes,
@@ -60,8 +68,9 @@ export const setNotes = (notes) => ({
 })
 
 export const startSetNotes = () => {
-  return (dispatch) => {
-    database.ref('notes').once('value').then((snapshot) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.userId
+    database.ref(`users/${uid}/notes`).once('value').then((snapshot) => {
       const notes = []
       snapshot.forEach((childSnap) => {
         notes.push({
@@ -69,6 +78,7 @@ export const startSetNotes = () => {
           ...childSnap.val(),
         })
       })
+
       dispatch(setNotes(notes))
     })
   }

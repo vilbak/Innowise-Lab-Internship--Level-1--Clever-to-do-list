@@ -4,16 +4,18 @@ import React, { useState } from 'react'
 import { SingleDatePicker } from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router'
 import './style.css'
 
 const TasksAdd = (props) => {
-  console.log('existing', props.existingNote)
+
   const [ title, setTitle ] = useState(props.existingNote ? props.existingNote.note : '')
   const [ calendarFocused, setCalendarFocused ] = useState(false)
   const [ chosenDay, setChosenDay ] = useState(props.existingNote ? moment(props.existingNote.createdAt) : moment())
   const [ description, setDescription ] = useState(props.existingNote ? props.existingNote.description : '')
   const [ error, setError ] = useState('')
-
+  const [ isDone, setIsDone ] = useState(false)
+  const history = useHistory()
 
   const onDateChange = (createdAt) => {
     if (chosenDay) {
@@ -30,21 +32,33 @@ const TasksAdd = (props) => {
     const value = e.target.value
     setTitle(value)
   }
+  const setStatus = (e) => {
+    e.preventDefault()
+    setIsDone(true)
+  }
   const onFocusChange = ({ focused }) => {
     setCalendarFocused(focused)
   }
-  const onSubmitHandler = (e) => {
+
+
+  const onSubmitHandler = async (e) => {
     e.preventDefault()
     if (!description) {
       setError('Please provide description')
 
     } else {
       setError('')
-      props.onSubmit({
+
+      await props.onSubmit({
         note: title,
         description: description,
         createdAt: chosenDay.valueOf(),
+        done: isDone,
       })
+      if (isDone) {
+        history.push('/main')
+      }
+
     }
 
   }
@@ -67,10 +81,12 @@ const TasksAdd = (props) => {
           focused={calendarFocused}
           onFocusChange={onFocusChange}
         />
+        {props.existingNote ? <div>
+          <button className={'doneButton'} onClick={setStatus}>Done</button>
+        </div> : ''}
         <div>
-          <button className={'addButton'}>{props.existingNote ? 'Edit The Note' : 'Add a  Note'}</button>
+          <button className={'addButton'}>{props.existingNote ? 'Apply changes' : 'Add a  Note'}</button>
         </div>
-
       </form>
     </div>
 

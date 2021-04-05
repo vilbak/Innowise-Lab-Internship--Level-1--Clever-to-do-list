@@ -8,7 +8,6 @@ import Tasks from './Tasks'
 
 const Main = () => {
 
-
   return (
     <>
       <LogOut />

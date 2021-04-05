@@ -1,6 +1,5 @@
 import moment from 'moment'
 
-// Filters Reducer
 
 const filtersReducerDefaultState = {
   startDate: moment().startOf('month'),

@@ -1,32 +1,49 @@
-.taskContainer{
+.taskContainer {
     margin-bottom: 10px;
     border: 5px solid #f7f7f7;
 }
-.buttonContainer{
-    display: flex;
-    flex-flow: column;
+
+.taskContainerComplete {
+    margin-bottom: 10px;
+    border: 5px solid #008000;
 }
-.removeButton{
+
+.buttonContainer {
+    display: flex;
+}
+
+.removeButton {
     margin-top: 20px;
+    margin-right: 5px;
     width: 100px;
     background: red;
-    color:white;
+    color: white;
     border: none;
     font-weight: 300;
-    font-size:20px;
+    font-size: 20px;
     outline: none;
     cursor: pointer;
 }
-.editButton{
-text-align: center;
+
+.editButton {
+    text-align: center;
     text-decoration: none;
     margin-top: 20px;
     width: 100px;
     background: gray;
-    color:white;
+    color: white;
     border: none;
     font-weight: 300;
-    font-size:20px;
+    font-size: 20px;
     outline: none;
     cursor: pointer;
+}
+
+.done {
+    color: green;
+}
+
+.doneContainer {
+    display: flex;
+
 }

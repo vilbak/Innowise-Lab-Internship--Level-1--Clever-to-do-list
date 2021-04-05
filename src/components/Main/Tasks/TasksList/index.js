@@ -7,6 +7,7 @@ import TaskItem from './TaskItem'
 import './style.css'
 
 export const TaskList = (props) => {
+
   return (
     <div className={'contentContainer'}>
       <div className={'listHeader'}>

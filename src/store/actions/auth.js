@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import * as actionTypes from './actionTypes'
@@ -38,9 +37,9 @@ export const auth = (email, password, isSignUp) => {
       password: password,
       returnSecureToken: true,
     }
-    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDyKnvtdUTNuZV6ZXTWWyZV0wKS0dSAlJU'
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_GOOGLE_API_KEY}`
     if (isSignUp) {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDyKnvtdUTNuZV6ZXTWWyZV0wKS0dSAlJU'
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_GOOGLE_API_KEY}`
     }
     axios.post(url, authData)
          .then(response => {

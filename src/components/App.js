@@ -15,6 +15,7 @@ import PrivateRoute from './PrivateRoute'
 import Register from './Register'
 
 function App()
+
 {
   return (
     <Router>
