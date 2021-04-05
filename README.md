@@ -8,7 +8,7 @@ You can find task requirements [here](https://docs.google.com/document/d/1heFuih
 
 ### Run the App
 
-This app is hosted on Vercel. [Link](https://innowise-lab-internship-level-1-clever-to-do-list-vilbak.vercel.app/register)
+This app is hosted on Vercel. [Link](https://innowise-lab-internship-level-1-clever-to-do-list.vercel.app/)
 
 If you want run this app locally, clone  this repository.
 
