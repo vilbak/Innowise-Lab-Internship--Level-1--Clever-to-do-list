@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Innowise Lab Internship: Level 1: Clever to-do list
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To do  app for Innowise Lab Internship by Andrew Zakharov. Created using React and Firebase
 
-## Available Scripts
+## Task requirements
 
-In the project directory, you can run:
+You can find task requirements [here](https://docs.google.com/document/d/1heFuihWrsw14bCpUdr6fla9ysqE6IrsobSMKAOpBiKA/edit#heading=h.cfna4so9wux2)
 
-### `yarn start`
+### Run the App
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This app is hosted on Vercel. [Link](https://innowise-lab-internship-level-1-clever-to-do-list-vilbak.vercel.app/register)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+If you want run this app locally, clone  this repository.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After clonning you need to run npm i command to get all dependencies.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Database snapshot
+    .
+    └──users
+        └──usersId                       #Unique user id generated when user signs up
+            └──notes                     #Number of notes that an user created
+                └──noteId               #Unique note id generated on creating a  note
+                      ├──createdAt      #Date of the creation the note
+                      ├──description     #Description of the note
+                      └──note            #Note title
+                      └──done            #Status of completion
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Application Stack
 
-### `yarn eject`
+## Axios
+Used for http requests
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Moment
+Used to simplify working with dates
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Redux
+Used for storring data
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## React Dates
+Used for calendar
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## React toastify
+Used for handling errors
 
-## Learn More
+## Vercel
+Used for hoisting
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
