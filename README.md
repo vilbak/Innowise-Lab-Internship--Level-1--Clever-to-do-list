@@ -20,13 +20,13 @@ After clonning you need to run npm i command to get all dependencies.
 ## Database snapshot
     .
     └──users
-        └──usersId                       #Unique user id generated when user signs up
-            └──notes                     #Number of notes that an user created
-                └──noteId               #Unique note id generated on creating a  note
-                      ├──createdAt      #Date of the creation the note
-                      ├──description     #Description of the note
-                      └──note            #Note title
-                      └──done            #Status of completion
+        └──id               #Unique user id generated when user signs up
+    └──notes                #All notes that were created
+        └──id               #Unique user id generated  when user signs up
+        ├──createdAt        #Date of the creation the note
+        ├──description      #Description of the note
+        └──note             #Note title
+        └──done             #Status of completion
 
 # Application Stack
 
