@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -31,7 +30,7 @@ const mapStateToProps = state => {
 }
 PrivateRoute.propTypes = {
   isAuthenticated: PropTypes.any,
-  component:PropTypes.func
+  component: PropTypes.func,
 
 }
 

@@ -7,7 +7,6 @@ import './style.css'
 import Tasks from './Tasks'
 
 const Main = () => {
-
   return (
     <>
       <LogOut />

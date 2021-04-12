@@ -16,7 +16,7 @@ export const startRemoveNote = ({ id } = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.userId
 
-    database.ref(`users/${uid}/notes/${id}`).remove().then(() => {
+    database.ref(`notes/${uid}/${id}`).remove().then(() => {
 
       dispatch(removeNote(({ id })))
     })
@@ -35,7 +35,7 @@ export const editNote = (id, updates) => ({
 export const startEditNote = (id, updates) => {
   return (dispatch, getState) => {
     const uid = getState().auth.userId
-    return database.ref(`users/${uid}/notes/${id}`).update(updates).then(() => {
+    return database.ref(`notes/${uid}/${id}`).update(updates).then(() => {
       dispatch(editNote(id, updates))
     })
   }
@@ -44,6 +44,7 @@ export const startEditNote = (id, updates) => {
 export const startAddNote = (noteData = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.userId
+    console.log(uid)
     const {
       description = '',
       note = '',
@@ -51,7 +52,7 @@ export const startAddNote = (noteData = {}) => {
       done = '',
     } = noteData
     const notes = { description, note, createdAt, done }
-    database.ref(`users/${uid}/notes`).push(notes).then((ref) => {
+    database.ref(`notes/${uid}`).push(notes).then((ref) => {
 
       dispatch(addNote(({
         id: ref.key,
@@ -70,7 +71,7 @@ export const setNotes = (notes) => ({
 export const startSetNotes = () => {
   return (dispatch, getState) => {
     const uid = getState().auth.userId
-    database.ref(`users/${uid}/notes`).once('value').then((snapshot) => {
+    database.ref(`notes/${uid}`).once('value').then((snapshot) => {
       const notes = []
       snapshot.forEach((childSnap) => {
         notes.push({

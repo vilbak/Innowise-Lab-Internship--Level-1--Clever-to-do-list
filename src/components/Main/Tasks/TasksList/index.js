@@ -1,13 +1,11 @@
-
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 import filter from '../../../../selectors/'
-import TaskItem from './TaskItem'
 import './style.css'
+import TaskItem from './TaskItem'
 
 export const TaskList = (props) => {
-
   return (
     <div className={'contentContainer'}>
       <div className={'listHeader'}>

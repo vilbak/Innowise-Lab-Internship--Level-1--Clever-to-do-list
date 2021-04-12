@@ -1,63 +1,49 @@
-import moment from 'moment'
+import { format } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { SingleDatePicker } from 'react-dates'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import 'react-dates/lib/css/_datepicker.css'
-import { connect } from 'react-redux'
+import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router'
 import './style.css'
 
 const TasksAdd = (props) => {
-
-  const [ title, setTitle ] = useState(props.existingNote ? props.existingNote.note : '')
-  const [ calendarFocused, setCalendarFocused ] = useState(false)
-  const [ chosenDay, setChosenDay ] = useState(props.existingNote ? moment(props.existingNote.createdAt) : moment())
-  const [ description, setDescription ] = useState(props.existingNote ? props.existingNote.description : '')
+  const [ chosenDay, setChosenDay ] = useState(props.existingNote ? props.existingNote.createdAt : format(new Date(), 'yyyy-MM-dd'))
+  const [ selected, setSelected ] = useState(new Date())
   const [ error, setError ] = useState('')
   const [ isDone, setIsDone ] = useState(false)
   const history = useHistory()
+  const { register, handleSubmit } = useForm()
 
   const onDateChange = (createdAt) => {
     if (chosenDay) {
-      setChosenDay(createdAt)
+      setChosenDay(format(createdAt, 'yyyy-MM-dd'))
+      setSelected(createdAt)
     }
 
   }
-  const onChangeDescription = (e) => {
-    const value = e.target.value
-    setDescription(value)
-  }
 
-  const onChange = (e) => {
-    const value = e.target.value
-    setTitle(value)
-  }
   const setStatus = (e) => {
     e.preventDefault()
     setIsDone(true)
   }
-  const onFocusChange = ({ focused }) => {
-    setCalendarFocused(focused)
-  }
 
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault()
-    if (!description) {
+  const onSubmitHandler = async (data) => {
+
+    if (!data.description) {
       setError('Please provide description')
-
     } else {
       setError('')
 
       await props.onSubmit({
-        note: title,
-        description: description,
-        createdAt: chosenDay.valueOf(),
+        note: data.title,
+        description: data.description,
+        createdAt: chosenDay,
         done: isDone,
       })
-      if (isDone) {
-        history.push('/main')
-      }
+      history.push('/main')
 
     }
 
@@ -65,21 +51,24 @@ const TasksAdd = (props) => {
   return (
     <div className={'contentContainer'}>
       <h1 className={'taskHeader'}> {props.existingNote ? 'Edit Notes' : 'Add Notes'}</h1>
-      <form className={'form'} onSubmit={onSubmitHandler}>
+      <form className={'form'} onSubmit={handleSubmit(onSubmitHandler)}>
         {error && <p className={'formError'}>{error}</p>}
-        <input className={'textInput'} type='text'
+        <input className={'textInput'}
+               {...register('title')}
+               type='text'
                placeholder='Title'
                autoFocus
-               value={title}
-               onChange={onChange} />
-        <textarea className={'description'} placeholder='Add a description for your note'
-                  value={description}
-                  onChange={onChangeDescription} />
-        <SingleDatePicker
+        />
+        <textarea
+          {...register('description')}
+          className={'description'} placeholder='Add a description for your note'
+        />
+        <DatePicker
           date={chosenDay}
-          onDateChange={onDateChange}
-          focused={calendarFocused}
-          onFocusChange={onFocusChange}
+          selected={selected}
+          onSelect={onDateChange}
+          autoFocus={true}
+          placeholderText={'Pick  a date'}
         />
         {props.existingNote ? <div>
           <button className={'doneButton'} onClick={setStatus}>Done</button>
@@ -92,11 +81,6 @@ const TasksAdd = (props) => {
 
   )
 }
-const mapStateToProps = (state) => {
-  return {
-    note: state.note,
-  }
-}
 
 
 TasksAdd.propTypes = {
@@ -105,4 +89,4 @@ TasksAdd.propTypes = {
   onSubmit: PropTypes.func,
 }
 
-export default connect(mapStateToProps)(TasksAdd)
+export default (TasksAdd)

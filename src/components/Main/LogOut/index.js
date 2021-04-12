@@ -1,17 +1,21 @@
-
 import PropTypes from 'prop-types'
 import React from 'react'
-import { connect } from 'react-redux'
-import {Redirect} from 'react-router'
-import * as actions from '../../../store/actions/index'
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux'
+import { Redirect } from 'react-router'
+import { logout } from '../../../store/actions/index'
 import './style.css'
 
-const LogOut = (props) => {
+const LogOut = () => {
+  const dispatch = useDispatch()
+  const authenticate = useSelector(state => state.auth.authenticated)
   /*function for logout */
   const clickHandler = async (event) => {
     try {
       event.preventDefault()
-      await props.onLogOut()
+      await dispatch(logout())
 
     } catch (e) {
       console.error(e)
@@ -19,32 +23,20 @@ const LogOut = (props) => {
   }
   let authRedirect = null
 
-  if (!props.auth) {
+  if (!authenticate) {
     authRedirect = <Redirect to={'/login'} />
   }
   return (
-      <section className={'maxWidth'}>
-        {authRedirect}
-        <div className={'header'}>
-          <h1 className={'titleHeader'}> Task Manager</h1>
-          <button onClick={clickHandler} className={'btn'}>Log out</button>
-        </div>
-      </section>
-
-
+    <section className={'maxWidth'}>
+      {authRedirect}
+      <div className={'header'}>
+        <h1 className={'titleHeader'}> Task Manager</h1>
+        <button onClick={clickHandler} className={'btn'}>Log out</button>
+      </div>
+    </section>
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth.authenticated,
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogOut: () => dispatch(actions.logout()),
-  }
-}
 
 LogOut.propTypes = {
   onLogOut: PropTypes.func,
@@ -52,4 +44,4 @@ LogOut.propTypes = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogOut)
+export default LogOut

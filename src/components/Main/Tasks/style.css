@@ -1,0 +1,30 @@
+.addButton{
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    width: 100px;
+    background: #07bc0c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 300;
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+}
+.noteContainer{
+    margin-top: 10px;
+    padding-left: 10px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 10px;
+    border: 5px solid #d758e0;
+    box-shadow: 15px 20px rgb(0 0 0 / 10%);
+    border-radius: 0px;
+}
+.styledLink{
+    width: 5px;
+}

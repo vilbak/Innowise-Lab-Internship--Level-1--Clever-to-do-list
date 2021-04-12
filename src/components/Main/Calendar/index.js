@@ -1,55 +1,44 @@
-import React  from 'react';
-import { useState } from 'react'
+import {
+  format,
+  getDate,
+  getDaysInMonth,
+} from 'date-fns'
 import PropTypes from 'prop-types'
-import { DateRangePicker } from 'react-dates'
-import { connect } from 'react-redux'
-import * as actions from '../../../store/actions/filters'
+import React from 'react'
+import DatePicker from 'react-horizontal-datepicker'
+import { useDispatch } from 'react-redux'
+import { setDate } from '../../../store/actions/filters'
 import './style.css'
 
 const Calendar = (props) => {
-  const [ calendarFocused, setCalendarFocused ] = useState(null)
+  const allDays = getDaysInMonth(new Date())
 
-  const onDatesChange = ({ startDate, endDate }) => {
-    props.onStartDate(startDate)
-    props.onEndDate(endDate)
+  const result = getDate(new Date())
+
+  const differenceDays = allDays - result
+  const dispatch = useDispatch()
+  const selectedDay = (date) => {
+
+    dispatch(setDate(format(date, 'yyyy-MM-dd')))
   }
-  const onFocusChange = (calendarFocused) => {
-    setCalendarFocused(calendarFocused)
-
-  }
-
   return (
-    <div className={'maxWidth'}>
-      <DateRangePicker
-        startDate={props.filter.startDate}
-        endDate={props.filter.endDate}
-        onDatesChange={onDatesChange}
-        focusedInput={calendarFocused}
-        onFocusChange={onFocusChange}
-        numberOfMonths={1}
-        isOutsideRange={() => false}
-        showClearDates={true}
+    <div className={'calendarContainer'}>
+      <DatePicker
+        getSelectedDay={selectedDay}
+        endDate={differenceDays}
+        labelFormat={'MMMM'}
+        color={'#750b04'}
       />
-
     </div>
   )
 }
-const mapStateToProps = (state) => {
-  return {
-    filter: state.filter,
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    onStartDate: (startDate) => dispatch(actions.setStartDate(startDate)),
-    onEndDate: (endDate) => dispatch(actions.setEndDate(endDate)),
-  }
-}
+
 
 Calendar.propTypes = {
   filter: PropTypes.object,
-  onStartDate:PropTypes.func,
-  onEndDate:PropTypes.func
+  onStartDate: PropTypes.func,
+  onEndDate: PropTypes.func,
+  onDate: PropTypes.func,
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Calendar)
+export default Calendar

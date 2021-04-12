@@ -13,6 +13,7 @@ import Main from './Main'
 import  TaskEdit  from './Main/Tasks/TaskEdit'
 import PrivateRoute from './PrivateRoute'
 import Register from './Register'
+import TaskAddNotes from './Main/Tasks/TasksAddNotes'
 
 function App()
 
@@ -25,7 +26,7 @@ function App()
         <Route path={'/login'} component={Login} />
         <Route path={'/register'} component={Register} />
         <Route path="/edit/:id" component={TaskEdit} />
-
+        <PrivateRoute path="/add" component={TaskAddNotes} />
         <PrivateRoute path={'/task'} />
       </Switch>
     </Router>

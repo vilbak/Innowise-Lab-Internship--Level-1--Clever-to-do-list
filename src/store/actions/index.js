@@ -4,8 +4,7 @@ export {
 } from './auth'
 
 export {
-  setStartDate,
-  setEndDate
+  setDate
 } from './filters'
 
 

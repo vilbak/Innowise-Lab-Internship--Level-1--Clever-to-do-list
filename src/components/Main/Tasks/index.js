@@ -1,36 +1,60 @@
 import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, {
+  useEffect,
+  useState,
+} from 'react'
 import {
-  startAddNote,
-  startSetNotes,
-} from '../../../store/actions/notes'
-import TasksAdd from './TasksAdd'
+  useDispatch,
+  useSelector,
+} from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { startSetNotes } from '../../../store/actions/notes'
+import './style.css'
 import TaskList from './TasksList'
 
-const Tasks = (props) => {
+const Tasks = () => {
+  const [ clicked, setClicked ] = useState(false)
+  const dispatch = useDispatch()
+
+
   useEffect(() => {
-    props.startSetNotes()
+    dispatch(startSetNotes())
   }, [])
+  const note = useSelector(state => state.note)
+
+  let addRedirect = null
+
+  const clickHandler = () => {
+    setClicked(true)
+
+  }
+  if (clicked) {
+    addRedirect = <Redirect to={'/add'} />
+  }
   return (
     <>
-      <TasksAdd
-        onSubmit={(note) => {
-          props.startAddNote(note)
-        }} />
+      <div className={'contentContainer'}>
+        <div className={'styledLink'}>
+          {addRedirect}
+          <button className={'addButton'} onClick={clickHandler}>Add</button>
+        </div>
+        <div className={'createdTaskContainer'}>
+          <div className={'noteContainer'}>{note.length === 0 ? `You dont have any notes yet` : 'Your notes'}
+            {note.map((note) => {
+              return <div>{note.description} at {note.createdAt}
+              </div>
+            })}
+          </div>
+        </div>
+      </div>
       <TaskList />
     </>)
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  startAddNote: (note) => dispatch(startAddNote(note)),
-  startSetNotes: () => dispatch(startSetNotes()),
-})
 
 Tasks.propTypes = {
   startAddNote: PropTypes.func,
   startSetNotes: PropTypes.func,
 }
 
-export default connect(null, mapDispatchToProps)(Tasks)
-
+export default Tasks

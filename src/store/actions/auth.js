@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import * as actionTypes from './actionTypes'
+import database from '../../fireBase'
 
 export const authStart = () => {
   return {
@@ -30,7 +31,8 @@ export const authFail = (error) => {
 
 
 export const auth = (email, password, isSignUp) => {
-  return dispatch => {
+  return (dispatch) => {
+
     dispatch(authStart())
     const authData = {
       email: email,
@@ -43,6 +45,8 @@ export const auth = (email, password, isSignUp) => {
     }
     axios.post(url, authData)
          .then(response => {
+           database.ref('users/id').push(response.data.localId).then((ref) => {
+           })
            dispatch(authSuccess(response.data.idToken, response.data.localId))
            dispatch(checkAuthTimeout(response.data.expiresIn))
          })

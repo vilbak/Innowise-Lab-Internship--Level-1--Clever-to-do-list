@@ -1,29 +1,35 @@
-import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux'
 import {
   Link,
   Redirect,
 } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import * as actions from '../../store/actions/index'
+import { auth } from '../../store/actions/index'
 import Spinner from '../Spinner/index'
 import './styles.css'
 
-const Register = (props) => {
+const Register = () => {
+
+  const dispatch = useDispatch()
+
+  const authenticate = useSelector(state => state.auth.authenticated)
+  const loading = useSelector(state => state.auth.loading)
 
 
-  const [ email, setEmail ] = useState('')
-  const [ password, setPassword ] = useState('')
-  const [ confirmPassword, setConfirmPassword ] = useState('')
+  const { register, handleSubmit } = useForm()
+
 
   /* function for auth */
-  const clickHandler = async (event) => {
-    if (confirmPassword === password) {
+  const clickHandler = async (data) => {
+    if (data.confirm === data.password) {
       try {
-        event.preventDefault()
-        await props.onAuth(email, password)
+        dispatch(auth(data.email, data.password))
       } catch (e) {
         console.error(e)
       }
@@ -32,62 +38,42 @@ const Register = (props) => {
 
   let authRedirect = null
 
-  if (props.auth) {
+  if (authenticate) {
     authRedirect = <Redirect to={'/main'} />
   }
 
-  return ((props.loading ? <Spinner /> :
+  return ((loading ? <Spinner /> :
       <section className={'wrapper'}>
         {authRedirect}
         <div className={'container'}>
           <ToastContainer autoClose={2000} />
-          <div className={'registerForm'}>
+          <form onSubmit={handleSubmit(clickHandler)} className={'registerForm'}>
             <span className={'title'}>Register Page</span>
             <input
+              {...register('email')}
               className={'input'}
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
               type="text"
               placeholder="E-mail"
             />
             <input
+              {...register('password')}
               className={'input'}
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
               type="password"
               placeholder="Password"
             />
             <input
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              {...register('confirm')}
               className={'input'}
               type="password"
               placeholder="Confirm Password"
             />
-            <button onClick={clickHandler} className={'btnR'}>Sign Up</button>
+            <button className={'btnR'}>Sign Up</button>
             <Link className={'link'} to="/login">Switch to Login</Link>
-          </div>
+          </form>
         </div>
       </section>)
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth.authenticated,
-    loading: state.auth.loading,
-    error: state.auth.error,
-  }
-}
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAuth: (email, password) => dispatch(actions.auth(email, password)),
-  }
-}
-Register.propTypes = {
-  onAuth: PropTypes.func,
-  auth: PropTypes.bool,
-  loading: PropTypes.bool,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+export default Register
